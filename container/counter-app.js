@@ -45,13 +45,18 @@ class Counter extends LitElement {
      width: 30vw;
 }
  `
+ /**
+  * this object has 3 states normal maximun and minimun
+  * they share two functions subtract and add each reacting diffirently according to the property
+  * phase state
+  */
     state = {
     phase: "normal",
     count: 0,
     normal: {
       value: null,
       add: function () {
-        if (this.state.count === this.state.maximum.value) {
+        if (this.state.count === this.state.maximum.value) {// increases count property value until max is reached
           this.state.phase = "maximum";
           alert("Maximum value reached");
           return this.state.maximum.value
@@ -59,7 +64,7 @@ class Counter extends LitElement {
         return ++this.state.count;
       }.bind(this),
       subtract: function () {
-        if (this.state.count === this.state.minimum.value) {
+        if (this.state.count === this.state.minimum.value) {//decreases count property until min is reached 
           this.state.phase = "minimum";
           alert("Minimum value reached");
           return  this.state.minimum.value
@@ -69,23 +74,23 @@ class Counter extends LitElement {
     },
     maximum: {
       value: 15,
-      add: () => {
+      add: () => {//keeps count the same and changes nothing
         this.state.phase = "normal";
         alert("Maximum value reached");
         return this.state.count = 15
       },
-      subtract: () => {
+      subtract: () => {//changes state and subtracts 1 from count
         this.state.phase = "normal";
         return --this.state.count;
       },
     },
     minimum: {
       value: -15,
-      add: () => {
+      add: () => { // changes state back to normal and adds 1 to count
         this.state.phase = "normal";
         return ++this.state.count;
       },
-      subtract: () => {
+      subtract: () => {//keeps count the same and changes nothing
         this.state.phase = "normal";
         alert("Minimum value reached");
         return this.state.count = -15
@@ -94,7 +99,7 @@ class Counter extends LitElement {
   };
 
   static properties = {
-    amount: { type: Number },
+    amount: { type: Number },//used to show the value of count in the object state to the user
   };
 
   constructor() {
